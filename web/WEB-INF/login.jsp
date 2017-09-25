@@ -8,8 +8,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/header.html" />
 
-    <h1>Login Page</h1>
     <c:if test="${user == null}">
+    <h1>Login Page</h1>
     <form action="Login" method="POST">
         Username: <input type="text" name="user" autofocus><br>
         Password: <input type="password" name="pass"><br>
@@ -20,8 +20,9 @@
         <span>${message}</span>
     </c:if>
     <c:if test="${user != null}">
+        <h1>Main Page</h1>
         <span>Hello, ${user.user}
-        <a href="Login?loggedOut=true">Logout</a>
+        <a href="Login?loggedOut">Logout</a>
         </span>
     </c:if>
 <c:import url="/includes/footer.jsp" />
