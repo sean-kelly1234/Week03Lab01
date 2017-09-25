@@ -5,6 +5,7 @@
  */
 package login;
 
+import domainclasses.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -39,9 +40,13 @@ public class LoginServlet extends HttpServlet {
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         if (user != null && pass != null && !user.equals("") && !pass.equals("")){
+            
             if (UserService.login(user, pass)){
-                request.setAttribute("user", user);
-                getServletContext().getRequestDispatcher("/WEB-INF/mainPage.jsp").forward(request, response);
+                User person = new User();
+                person.setUser(user);
+                person.setPass(pass);
+                request.setAttribute("user", person);
+                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             }
             else{
                 request.setAttribute("message", "Invalid username or password");
